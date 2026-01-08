@@ -1,0 +1,92 @@
+# Room Name: Simple CTF
+
+## Objective
+Find the user flag and root flag from the target machine.
+
+## Target Information
+IP Address: 10.10.XX.XX
+
+---
+
+## Enumeration
+
+### Nmap Scan
+Command used:
+nmap -A 10.10.XX.XX
+
+Result:
+- Port 21 → FTP (anonymous login allowed)
+- Port 22 → SSH
+- Port 80 → HTTP (Web server running)
+
+---
+
+## Initial Access
+
+### FTP Enumeration
+I logged into FTP using anonymous credentials:
+- username: anonymous
+- password: anonymous
+
+Found a text file which contained a username hint.
+
+---
+
+## Web Enumeration
+Visited the website on port 80.
+
+Used directory brute force:
+gobuster dir -u http://10.10.XX.XX -w common.txt
+
+Found:
+- /admin directory
+
+Inside the admin page, there was a login form.
+
+---
+
+## Exploitation
+
+### Brute Force Attack
+Using the username from FTP, I used Hydra to brute force SSH.
+
+Command:
+hydra -l user -P rockyou.txt ssh://10.10.XX.XX
+
+Successfully logged in via SSH.
+
+---
+
+## User Flag
+After login:
+cat user.txt
+
+User flag found ✔️  
+(Flag hidden for ethical reasons)
+
+---
+
+## Privilege Escalation
+
+Checked sudo permissions:
+sudo -l
+
+User was allowed to run nano as root.
+
+Using GTFOBins technique, I escalated privileges to root.
+
+---
+
+## Root Flag
+After getting root access:
+cat root.txt
+
+Root flag found ✔️  
+(Flag hidden)
+
+---
+
+## Lessons Learned
+- Always check FTP anonymous login
+- Enumeration is the most important step
+- GTFOBins is very useful for privilege escalation
