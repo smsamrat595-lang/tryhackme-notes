@@ -1,5 +1,6 @@
 # NRETWorking:
 We can cheak IP address in - AbuseIPDB, Cisco, Talos, Intelligence
+
 ip -  192. 168.  1.  1 (Privet ip)
       ⬇️   ⬇️  ⬇️  ⬇️
 OCTAL #1    #2  #3   #4 (Every octal shold be from 0-255)
